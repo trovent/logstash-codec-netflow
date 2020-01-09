@@ -138,7 +138,7 @@ class LogStash::Codecs::Netflow < LogStash::Codecs::Base
         seconds = flowset.unix_sec - (millis / 1000)
         micros = (flowset.unix_nsec / 1000) - ((millis % 1000) * 1000)
         if micros < 0
-          seconds--
+          seconds -= 1
           micros += 1000000
         end
         event[@target][k.to_s] = LogStash::Timestamp.at(seconds, micros).to_iso8601
